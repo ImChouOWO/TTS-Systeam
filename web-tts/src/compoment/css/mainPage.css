@@ -1,0 +1,113 @@
+.App {
+    background-color: #0d0d0d;
+    color: #33ff33;
+    font-family: 'Courier New', Courier, monospace;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .terminal-container {
+    background-color: #1a1a1a;
+    border: 1px solid #4caf50;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 800px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .terminal-img {
+    width: 100%;
+    height: 150px;
+    /* background-image: url('/path/to/your/terminal-image.png'); */
+    background-size: cover;
+    border-bottom: 2px solid #4caf50;
+  }
+  
+  .chat-history {
+    overflow-y: auto;
+    max-height: 300px;
+    margin-bottom: 20px;
+  }
+  
+  .chat-message {
+    background-color: #262626;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .input-area {
+    display: flex;
+    width: 80%;
+    max-width: 800px;
+  }
+  
+  .input-area input {
+    flex-grow: 1;
+    border: 1px solid #4caf50;
+    background-color: #262626;
+    color: #33ff33;
+    padding: 10px;
+    border-radius: 5px 0 0 5px;
+  }
+  
+  .send-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+  }
+  
+  .send-button:hover {
+    background-color: #66ff66;
+  }
+  .switch-container {
+    margin-right: 10px;
+  }
+  .audio {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #1a1a1a; /* 終端機風格背景色 */
+    color: #33ff33; /* 文字顏色 */
+    padding: 10px;
+    border-radius: 5px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 800px;
+  }
+  
+  .audio-control {
+    flex-grow: 1;
+    margin-right: 10px;
+  }
+  
+  .audioUrl {
+    width: 100%; /* 控制音頻播放器的寬度 */
+    color: #33ff33; /* 音頻播放器文字顏色 */
+    border-radius: 5px;
+  }
+  
+  .audioBtn {
+    padding: 0 20px;
+    border: none;
+    background: #4caf50; /* 按鈕背景色 */
+    cursor: pointer;
+    outline: none;
+    height: 40px;
+    color: white; /* 按鈕文字顏色 */
+    border-radius: 5px;
+  }
+  
+  .audioBtn:hover {
+    background-color: #66ff66; /* 按鈕懸停背景色 */
+  }
+  
+
+  
