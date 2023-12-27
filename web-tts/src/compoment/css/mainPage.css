@@ -14,23 +14,34 @@
     border: 1px solid #4caf50;
     border-radius: 5px;
     width: 80%;
+    height: 50%;
     max-width: 800px;
     padding: 20px;
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: row; /* 子元素横向排列 */
+    align-items: flex-start; /* 子元素顶部对齐 */
+    justify-content: space-between; /* 子元素间隔均匀 */
+    padding: 10px;
   }
   
   .terminal-img {
-    width: 100%;
-    height: 150px;
-    /* background-image: url('/path/to/your/terminal-image.png'); */
+    /* width: 100%; */
+    width: 50%;
+    height: 90%;
+    margin: 5px; /* 提供间隔 */
     background-size: cover;
-    border-bottom: 2px solid #4caf50;
+   
+    flex-grow: 1;
+    padding: 10px;
+    border-right: 2px solid #4caf50;
   }
   
   .chat-history {
+    flex-grow: 1;
     overflow-y: auto;
-    max-height: 300px;
-    margin-bottom: 20px;
+    
+    padding: 10px;
   }
   
   .chat-message {
@@ -42,7 +53,7 @@
   
   .input-area {
     display: flex;
-    width: 80%;
+    width: 100%;
     max-width: 800px;
   }
   
@@ -107,6 +118,10 @@
   
   .audioBtn:hover {
     background-color: #66ff66; /* 按鈕懸停背景色 */
+  }
+  .live2dCanva{
+    z-index: 0;
+    position: relative;
   }
   
 

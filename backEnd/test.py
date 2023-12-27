@@ -1,24 +1,26 @@
-from pydub import AudioSegment
-import speech_recognition as sr
+import openai
+import os
 
-# 設定ffmpeg的路徑（如果它不在您的環境變量中）
-# AudioSegment.converter = r"path_to_ffmpeg.exe"
+from openai import OpenAI
+client = OpenAI(
+    
+)
+user_message_chinese = '你好啊'
+completion = client.chat.completions.create(
+  model="gpt-3.5-turbo",
+  
+  messages=[
+    {"role": "system", "content": "你是一個友善、正向、樂觀、積極的人"},
+    {"role": "user", "content": f"'{user_message_chinese}'"}
+  ]
+)
 
-# 讀取原始音訊檔案
-original_audio = AudioSegment.from_file('backEnd/recode/user_upload.wav')
-
-# 將音訊轉換為PCM格式的WAV
-pcm_audio = original_audio.set_frame_rate(16000).set_channels(1).set_sample_width(2)
-pcm_audio.export('backEnd/recode/converted_audio.wav', format='wav')
-
-# 使用speech_recognition進行語音識別
-r = sr.Recognizer()
-with sr.AudioFile('backEnd/recode/converted_audio.wav') as source:
-    audio = r.record(source)
-    try:
-        text = r.recognize_google(audio, language='zh-TW')  # 使用Google Web Speech API進行語音識別
-        print(text)
-    except sr.UnknownValueError:
-        print("Google Web Speech API 無法識別音頻")
-    except sr.RequestError as e:
-        print(f"無法從Google Web Speech API獲取結果; {e}")
+# 打印出生成的文本内容
+if completion.choices:
+    generated_message = completion.choices[0].message
+    if generated_message:
+        print(generated_message.content)
+    else:
+        print("No message content generated.")
+else:
+    print("No response generated.")

@@ -1,17 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect ,useState,useRef} from 'react';
 import '../css/mainPage.css';
 import AudioRecorder from './AudioRecorder';
-
+import Live2DComponent from './live2d';
+import Cookies from 'js-cookie';
+import io from 'socket.io-client';
 function MainPage() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-
+  const [socket, setSocket] = useState("");
+  const [userID,setUserID] = useState("test_1")
   const handleSend = () => {
-    if(input.trim() !== "") {
-      setMessages([...messages, input]);
+    const trimmedInput = input.trim();
+    if (trimmedInput !== "") {
+      // 首先更新 messages 状态
+      setMessages(prevMessages => {
+        // 新的 messages 数组
+        const historyMessages = [...prevMessages, trimmedInput];
+  
+        // 然后发送这个更新后的 messages 数组
+        socket.emit('user_text_input', { messages: historyMessages, userID });
+  
+        // 返回更新后的 messages 数组以更新状态
+        return historyMessages;
+      });
+  
+      // 清空输入字段
       setInput("");
     }
-  }
+  };
+  
+  
+
 
   const handleInputChange = (e) => {
     setInput(e.target.value);
@@ -23,11 +42,22 @@ function MainPage() {
     setIsSwitchOn(!isSwitchOn);
   };
 
+  const terminalImgRef = useRef(null);
+
+  useEffect(() => {
+    const newSocket = io('http://127.0.0.1:5000');
+      setSocket(newSocket);
+
+      return () => {
+        newSocket.disconnect();
+      };
+    }, []);
+
   return (
     <div className="App">
-      <div className="terminal-container">
-        <div className='terminal-img'>
-          {/* 這裡可以放置終端機的圖像或者其他裝飾 */}
+      <div className="terminal-container" ref={terminalImgRef} >
+        <div className='terminal-img' >
+          <Live2DComponent parentRef={terminalImgRef}/>
         </div>
         <div className="chat-history">
           {messages.map((message, index) => (

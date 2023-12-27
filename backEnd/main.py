@@ -2,8 +2,41 @@ from flask import Flask, request, jsonify
 import os
 from pydub import AudioSegment
 import speech_recognition as sr
+from flask_socketio import SocketIO
+from flask_cors import CORS,cross_origin
+import openai
 
-app = Flask(__name__)
+app = Flask(__name__,
+            static_url_path='/python',   
+            static_folder='static',      
+            template_folder='templates') 
+app.config["DEBUG"] = True
+app.config['JSON_AS_ASCII'] = False
+
+
+
+
+CORS(app, resources={r"/*": {"origins": "http://127.0.0.1:3000"}},
+     supports_credentials=True,
+     allow_headers=["Content-Type", "Authorization"],
+     methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
+
+socketio = SocketIO(app, cors_allowed_origins="*")
+
+
+openai.api_key = "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"
+
+def chat(prompt, model):
+    completions = openai.Completion.create(
+        engine=model,
+        prompt=prompt,
+        max_tokens=1024,
+        n=1,
+        stop=None,
+        temperature=1,
+    )
+    message = completions.choices[0].text.strip()
+    return message
 
 
 def audio_to_text():
@@ -30,6 +63,14 @@ def audio_to_text():
             text = f"無法從Google Web Speech API獲取結果; {e}"
             print(text)
             return text
+
+
+@socketio.on("user_text_input")
+def user_text_input(data):
+    print(data)
+    pass
+
+
 
 @app.route('/upload', methods=['POST'])
 def upload_file():

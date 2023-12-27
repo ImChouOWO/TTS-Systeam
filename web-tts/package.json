@@ -4,13 +4,21 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
+    "@pixi/app": "^6.5",
+    "@pixi/core": "^6.5",
+    "@pixi/interaction": "^6.5",
+    "@pixi/ticker": "^6.5",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.12.5",
+    "js-cookie": "^3.0.5",
+    "pixi-live2d-display": "^0.4.0",
+    "pixi.js": "^7.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "socket.io-client": "^4.7.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
