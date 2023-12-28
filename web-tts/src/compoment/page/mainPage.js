@@ -12,22 +12,29 @@ function MainPage() {
   const handleSend = () => {
     const trimmedInput = input.trim();
     if (trimmedInput !== "") {
-      // 首先更新 messages 状态
-      setMessages(prevMessages => {
-        // 新的 messages 数组
-        const historyMessages = [...prevMessages, trimmedInput];
+      // 更新 messages 狀態
+      setMessages(prevMessages => [...prevMessages, trimmedInput]);
   
-        // 然后发送这个更新后的 messages 数组
-        socket.emit('user_text_input', { messages: historyMessages, userID });
-  
-        // 返回更新后的 messages 数组以更新状态
-        return historyMessages;
-      });
-  
-      // 清空输入字段
+      // 清空輸入欄位
       setInput("");
     }
   };
+  
+  // 使用 useEffect 監聽 messages 狀態的變化
+  useEffect(() => {
+    if (messages.length > 0) {
+      // 當 messages 更新後，發送整個歷史消息
+      socket.emit('user_text_input', { messages, userID });
+      socket.on("response",(data)=>{
+        console.log(data);
+      });
+    }
+  }, [messages]); // 監聽 messages 的變化
+
+ 
+  
+  
+  
   
   
 

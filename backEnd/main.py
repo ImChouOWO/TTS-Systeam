@@ -5,6 +5,7 @@ import speech_recognition as sr
 from flask_socketio import SocketIO
 from flask_cors import CORS,cross_origin
 import openai
+from openai import OpenAI
 
 app = Flask(__name__,
             static_url_path='/python',   
@@ -24,19 +25,7 @@ CORS(app, resources={r"/*": {"origins": "http://127.0.0.1:3000"}},
 socketio = SocketIO(app, cors_allowed_origins="*")
 
 
-openai.api_key = "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"
 
-def chat(prompt, model):
-    completions = openai.Completion.create(
-        engine=model,
-        prompt=prompt,
-        max_tokens=1024,
-        n=1,
-        stop=None,
-        temperature=1,
-    )
-    message = completions.choices[0].text.strip()
-    return message
 
 
 def audio_to_text():
@@ -65,10 +54,45 @@ def audio_to_text():
             return text
 
 
+def generate_text(user_input,user_history):
+    client = OpenAI(
+        api_key='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'
+    )
+  
+    completion = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    
+    messages=[
+        {"role": "system", "content": f"你是一個友善、正向、樂觀、說話簡單簡短自然、積極的人,回答需要依據以下的使用者歷史問題{user_history}並且以1到2句話回答"},
+        {"role": "user", "content": f"'{user_input}'"}
+    ]
+    )
+
+    # 打印出生成的文本内容
+    if completion.choices:
+        generated_message = completion.choices[0].message
+        if generated_message:
+            print(generated_message.content)
+
+            return generated_message.content
+        else:
+            print("No message content generated.")
+            return "No message content generated."
+    else:
+        print("No response generated.")
+        return "No response generated."
+    
+    
+
+
 @socketio.on("user_text_input")
 def user_text_input(data):
-    print(data)
-    pass
+    print(data['messages'][-1])
+    userID = data['userID']
+    return_text =  generate_text(data['messages'][-1],data['messages'][0:-2])
+    
+    # return_text="text"
+    socketio.emit("response",{"message":[return_text,userID]})
 
 
 
