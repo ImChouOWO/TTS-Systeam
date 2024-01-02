@@ -39,10 +39,12 @@
   
   .chat-history {
     flex-grow: 1;
-    overflow-y: auto;
+    overflow-y: overlay; /* Keep this to allow scrolling */
+    max-height: 300px; /* Set a maximum height */
     width: 30%;
     padding: 10px;
   }
+  
   .chat-message {
     display: flex; /* 使用 flex 布局 */
     align-items: center; /* 垂直居中對齊 */
@@ -76,26 +78,36 @@
   
   .input-area {
     display: flex;
-    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    background: #1a1a1a; /* 終端機風格背景色 */
+    color: #33ff33; /* 文字顏色 */
+    padding: 10px;
+    border-radius: 5px;
+    margin: 20px auto;
+    width: 90%;
     max-width: 800px;
   }
   
   .input-area input {
     flex-grow: 1;
-    border: 1px solid #4caf50;
-    background-color: #262626;
+    border: 0px solid #262626;
+    background-color: #373636;
     color: #33ff33;
     padding: 10px;
-    border-radius: 5px 0 0 5px;
+    margin-right: 10px;
+    border-radius:5px 5px 5px 5px;
   }
   
   .send-button {
-    background-color: #4caf50;
-    color: white;
+    padding: 0 20px;
     border: none;
-    padding: 10px 20px;
-    border-radius: 0 5px 5px 0;
+    background: #4caf50; /* 按鈕背景色 */
     cursor: pointer;
+    outline: none;
+    height: 40px;
+    color: white; /* 按鈕文字顏色 */
+    border-radius: 5px;
   }
   
   .send-button:hover {
@@ -163,6 +175,33 @@
     margin: 2px 0px 2px 2px
     
   }
+
+
+  /* 整個滾動條的樣式 */
+::-webkit-scrollbar {
+  width: 4px; /* 橫向滾動條的高度 或 垂直滾動條的寬度 */
+  height: 100%; /* 橫向滾動條的高度 */
+}
+
+
+/* 滾動條軌道的樣式 */
+::-webkit-scrollbar-track {
+  background: #555; /* 滾動條軌道的背景色 */
+  border-radius: 10px; /* 滾動條軌道的圓角 */
+}
+
+/* 滾動條的滑塊樣式 */
+::-webkit-scrollbar-thumb {
+  background: #4caf50; /* 滾動條滑塊的背景色 */
+  border-radius: 10px; /* 滾動條滑塊的圓角 */
+}
+
+/* 當鼠標經過滾動條滑塊時的樣式 */
+::-webkit-scrollbar-thumb:hover {
+  background: #59d15d; /* 滾動條滑塊的懸停背景色 */
+  width: 2px;
+}
+
   
 
   

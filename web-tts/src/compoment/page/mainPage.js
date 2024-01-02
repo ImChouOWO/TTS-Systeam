@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef ,useLayoutEffect} from 'react';
 import '../css/mainPage.css';
 import AudioRecorder from './AudioRecorder';
 import Live2DComponent from './live2d';
@@ -10,6 +10,15 @@ function MainPage() {
   const [socket, setSocket] = useState(null);
   const [userID, setUserID] = useState("test_1");
   const terminalImgRef = useRef(null);
+  const chatHistoryRef = useRef(null);
+  useLayoutEffect(() => {
+    if (chatHistoryRef.current) {
+      chatHistoryRef.current.scrollTop = chatHistoryRef.current.scrollHeight;
+    }
+  }, [messages]); // 當messages更新時觸發滾動
+
+  
+  
   useEffect(() => {
     const newSocket = io('http://127.0.0.1:5000');
     setSocket(newSocket);
@@ -42,7 +51,7 @@ function MainPage() {
         <div className='terminal-img' >
           <Live2DComponent parentRef={terminalImgRef}/>
         </div>
-        <div className="chat-history">
+        <div className="chat-history" ref={chatHistoryRef}>
           {messages.map((message, index) => (
             <>
             
