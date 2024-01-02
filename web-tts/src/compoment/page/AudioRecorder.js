@@ -1,9 +1,24 @@
-import React, { useState } from 'react';
-
-const AudioRecorder = () => {
+import React, { useState,useEffect } from 'react';
+import io from 'socket.io-client';
+const AudioRecorder = (props) => {
+    const dataFromParent = props.data;
     const [recording, setRecording] = useState(false);
     const [mediaRecorder, setMediaRecorder] = useState(null);
     const [audioURL, setAudioURL] = useState('');
+    const [socket, setSocket] = useState(null);
+    const [audioPath,setPath] = useState(null);
+    const [userID,setID] = useState("test_1");
+    useEffect(()=>{
+        const newSocket = io('http://127.0.0.1:5000'); 
+        setSocket(newSocket);
+        newSocket.on("voice_response", (data) => {
+            setPath(data);
+        });
+        // 接收後即關閉通道
+        return () => newSocket.disconnect();
+
+
+    },[]);
 
     const startRecording = async () => {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -18,8 +33,9 @@ const AudioRecorder = () => {
             const audioBlob = e.data;
             const formData = new FormData();
             formData.append('file', audioBlob, 'recording.wav');
-
-            fetch('http://localhost:5000/upload', { // Flask伺服器的URL
+            formData.append('userID', userID);
+            formData.append('chatHistory', JSON.stringify(dataFromParent));
+            fetch('http://127.0.0.1:5000/upload', { // Flask伺服器的URL
                 method: 'POST',
                 body: formData,
             })
@@ -41,10 +57,16 @@ const AudioRecorder = () => {
 
     const stopRecording = () => {
         mediaRecorder && mediaRecorder.stop();
+        socket.emit("user_voice_input",{
+            status:"not_done",
+            user_ID:'test_1'
+        })
+        console.log(dataFromParent);
     };
 
     return (
         <div className='audio'>
+            
             <div className="audio-control">
                 {audioURL && <audio className='audioUrl' src={audioURL} controls />}
             </div>

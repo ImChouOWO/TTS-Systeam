@@ -5,12 +5,16 @@ import MainPage from './compoment/page/mainPage';
 import reportWebVitals from './reportWebVitals';
 import AudioRecorder from './compoment/page/AudioRecorder';
 import Live2DComponent from './compoment/page/live2d';
+import AudioPlayer from './compoment/page/audioPlayer';
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
     {/* <AudioRecorder /> */}
+    {/* <AudioPlayer/> */}
     <MainPage/>
     {/* <Live2DComponent /> */}
   </React.StrictMode>

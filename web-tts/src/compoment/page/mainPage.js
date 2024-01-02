@@ -1,64 +1,40 @@
-import React, { useEffect ,useState,useRef} from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import '../css/mainPage.css';
 import AudioRecorder from './AudioRecorder';
 import Live2DComponent from './live2d';
-import Cookies from 'js-cookie';
 import io from 'socket.io-client';
+
 function MainPage() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-  const [socket, setSocket] = useState("");
-  const [userID,setUserID] = useState("test_1")
+  const [socket, setSocket] = useState(null);
+  const [userID, setUserID] = useState("test_1");
+  const terminalImgRef = useRef(null);
+  useEffect(() => {
+    const newSocket = io('http://127.0.0.1:5000');
+    setSocket(newSocket);
+
+    newSocket.on("text_response", (data) => {
+      setMessages(prevMessages => [...prevMessages, { content: data.message.content, type: data.message.type }]);
+    });
+    // 接收後即關閉通道
+    return () => newSocket.disconnect();
+  }, []);
+
   const handleSend = () => {
+    // input.trim()以解決react的異步特性
     const trimmedInput = input.trim();
     if (trimmedInput !== "") {
-      // 更新 messages 狀態
-      setMessages(prevMessages => [...prevMessages, trimmedInput]);
-  
-      // 清空輸入欄位
+      setMessages(prevMessages => [...prevMessages, { content: trimmedInput, type: 'user' }]);
+      console.log(messages);
       setInput("");
+      socket.emit('user_text_input', { messages: trimmedInput, userID });
     }
   };
-  
-  // 使用 useEffect 監聽 messages 狀態的變化
-  useEffect(() => {
-    if (messages.length > 0) {
-      // 當 messages 更新後，發送整個歷史消息
-      socket.emit('user_text_input', { messages, userID });
-      socket.on("response",(data)=>{
-        console.log(data);
-      });
-    }
-  }, [messages]); // 監聽 messages 的變化
-
- 
-  
-  
-  
-  
-  
-
 
   const handleInputChange = (e) => {
     setInput(e.target.value);
   }
-
-  const [isSwitchOn, setIsSwitchOn] = useState(false);
-
-  const toggleSwitch = () => {
-    setIsSwitchOn(!isSwitchOn);
-  };
-
-  const terminalImgRef = useRef(null);
-
-  useEffect(() => {
-    const newSocket = io('http://127.0.0.1:5000');
-      setSocket(newSocket);
-
-      return () => {
-        newSocket.disconnect();
-      };
-    }, []);
 
   return (
     <div className="App">
@@ -68,7 +44,15 @@ function MainPage() {
         </div>
         <div className="chat-history">
           {messages.map((message, index) => (
-            <div key={index} className="chat-message">{message}</div>
+            <>
+            
+            <div key={index} className={`chat-message ${message.type === 'user' ? 'user-message' : 'assistant-message'}`}>
+              <div className='sticker'>
+                <img src={`${message.type === 'user' ? 'img/user.png' : 'img/bot.png'}`} className={`${message.type === 'user' ? 'user-sticker' : 'assistant-sticker'}`}></img>
+              </div>
+              {message.content}
+            </div>
+            </>
           ))}
         </div>
       </div>
@@ -83,11 +67,9 @@ function MainPage() {
             }
           }}
         />
-       
         <button className="send-button" onClick={handleSend}>Send</button>
-
       </div>
-      <AudioRecorder/>
+      <AudioRecorder data = {messages}/>
     </div>
   );
 }

@@ -42,9 +42,9 @@ function Live2DComponent({ parentRef }) {
           app.stage.addChild(model);
       
           // 设置模型的初始位置和大小
-          model.anchor.set(0.6, 0.5);
+          model.anchor.set(0.5, 0.5);
           model.scale.set(0.3, 0.3);
-          model.position.set(offsetWidth/3, offsetHeight / 2);
+          model.position.set(offsetWidth/2, offsetHeight/1.5);
       
           // 添加交互逻辑
           canvas.addEventListener('pointerdown', (event) => {

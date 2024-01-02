@@ -40,15 +40,38 @@
   .chat-history {
     flex-grow: 1;
     overflow-y: auto;
-    
+    width: 30%;
     padding: 10px;
   }
-  
   .chat-message {
-    background-color: #262626;
-    margin: 5px 0;
+    display: flex; /* 使用 flex 布局 */
+    align-items: center; /* 垂直居中對齊 */
+    margin: 10px 0;
+  }
+  
+  /* 貼圖樣式 */
+  .sticker {
+    margin-right: 10px; /* 與消息內容之間的間隔 */
+  }
+  
+  .sticker img {
+    width: 40px; /* 調整貼圖大小 */
+    height: 40px;
+  }
+  
+  /* 消息內容樣式 */
+  .chat-message .user-message, .chat-message .assistant-message {
+    flex-grow: 1; /* 使消息內容占據剩餘空間 */
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
+  }
+  
+  .user-message {
+    background-color: #333; /* 用戶訊息的背景色 */
+  }
+  
+  .assistant-message {
+    background-color: #444; /* 助理訊息的背景色 */
   }
   
   .input-area {
@@ -114,6 +137,7 @@
     height: 40px;
     color: white; /* 按鈕文字顏色 */
     border-radius: 5px;
+    
   }
   
   .audioBtn:hover {
@@ -122,6 +146,22 @@
   .live2dCanva{
     z-index: 0;
     position: relative;
+    height: 100%;
+    width: 100%;
+  }
+  .user-sticker{
+    width: 10%;
+    height: auto;
+    border-radius: 50px ;
+    margin: 2px 0px 2px 2px
+    
+  }
+  .assistant-sticker{
+    width: 10%;
+    height: auto;
+    border-radius: 50px ;
+    margin: 2px 0px 2px 2px
+    
   }
   
 
