@@ -1,207 +1,206 @@
 .App {
-    background-color: #0d0d0d;
-    color: #33ff33;
-    font-family: 'Courier New', Courier, monospace;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
+  background-color: #0d0d0d;
+  color: #33ff33;
+  font-family: 'Courier New', Courier, monospace;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.terminal-container {
+  background-color: #1a1a1a;
+  border: 1px solid #4caf50;
+  border-radius: 5px;
+  width: 80%;
+  height: 50%;
+  max-width: 800px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row; /* 子元素横向排列 */
+  align-items: flex-start; /* 子元素顶部对齐 */
+  justify-content: space-between; /* 子元素间隔均匀 */
+  padding: 10px;
+}
+
+.terminal-img {
+  /* width: 100%; */
+  width: 50%;
+  height: 90%;
+  margin: 5px; /* 提供间隔 */
+  background-size: cover;
+ 
+  flex-grow: 1;
+  padding: 10px;
+  border-right: 2px solid #4caf50;
+}
+
+.chat-history {
+  flex-grow: 1;
+  overflow-y: overlay; /* Keep this to allow scrolling */
+  max-height: 300px; /* Set a maximum height */
+  width: 30%;
+  padding: 10px;
+}
+
+.chat-message {
+  display: flex; /* 使用 flex 布局 */
+  align-items: center; /* 垂直居中對齊 */
+  margin: 10px 0;
+}
+
+/* 貼圖樣式 */
+.sticker {
+  margin-right: 10px; /* 與消息內容之間的間隔 */
+}
+
+.sticker img {
+  width: 40px; /* 調整貼圖大小 */
+  height: 40px;
+}
+
+/* 消息內容樣式 */
+.chat-message .user-message, .chat-message .assistant-message {
+  flex-grow: 1; /* 使消息內容占據剩餘空間 */
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.user-message {
+  background-color: #333; /* 用戶訊息的背景色 */
+}
+
+.assistant-message {
+  background-color: #444; /* 助理訊息的背景色 */
+}
+
+.input-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1a1a1a; /* 終端機風格背景色 */
+  color: #33ff33; /* 文字顏色 */
+  padding: 10px;
+  border-radius: 5px;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 800px;
+}
+
+.input-area input {
+  flex-grow: 1;
+  border: 0px solid #262626;
+  background-color: #373636;
+  color: #33ff33;
+  padding: 10px;
+  margin-right: 10px;
+  border-radius:5px 5px 5px 5px;
+}
+
+.send-button {
+  padding: 0 20px;
+  border: none;
+  background: #4caf50; /* 按鈕背景色 */
+  cursor: pointer;
+  outline: none;
+  height: 40px;
+  color: white; /* 按鈕文字顏色 */
+  border-radius: 5px;
+}
+
+.send-button:hover {
+  background-color: #66ff66;
+}
+.switch-container {
+  margin-right: 10px;
+}
+.audio {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1a1a1a; /* 終端機風格背景色 */
+  color: #33ff33; /* 文字顏色 */
+  padding: 10px;
+  border-radius: 5px;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 800px;
+}
+
+.audio-control {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.audioUrl {
+  width: 100%; /* 控制音頻播放器的寬度 */
+  color: #33ff33; /* 音頻播放器文字顏色 */
+  border-radius: 5px;
+}
+
+.audioBtn {
+  padding: 0 20px;
+  border: none;
+  background: #4caf50; /* 按鈕背景色 */
+  cursor: pointer;
+  outline: none;
+  height: 40px;
+  color: white; /* 按鈕文字顏色 */
+  border-radius: 5px;
   
-  .terminal-container {
-    background-color: #1a1a1a;
-    border: 1px solid #4caf50;
-    border-radius: 5px;
-    width: 80%;
-    height: 50%;
-    max-width: 800px;
-    padding: 20px;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: row; /* 子元素横向排列 */
-    align-items: flex-start; /* 子元素顶部对齐 */
-    justify-content: space-between; /* 子元素间隔均匀 */
-    padding: 10px;
-  }
+}
+
+.audioBtn:hover {
+  background-color: #66ff66; /* 按鈕懸停背景色 */
+}
+.live2dCanva{
+  z-index: 0;
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+.user-sticker{
+  width: 10%;
+  height: auto;
+  border-radius: 50px ;
+  margin: 2px 0px 2px 2px
   
-  .terminal-img {
-    /* width: 100%; */
-    width: 50%;
-    height: 90%;
-    margin: 5px; /* 提供间隔 */
-    background-size: cover;
-   
-    flex-grow: 1;
-    padding: 10px;
-    border-right: 2px solid #4caf50;
-  }
+}
+.assistant-sticker{
+  width: 10%;
+  height: auto;
+  border-radius: 50px ;
+  margin: 2px 0px 2px 2px
   
-  .chat-history {
-    flex-grow: 1;
-    overflow-y: overlay; /* Keep this to allow scrolling */
-    max-height: 300px; /* Set a maximum height */
-    width: 30%;
-    padding: 10px;
-  }
-  
-  .chat-message {
-    display: flex; /* 使用 flex 布局 */
-    align-items: center; /* 垂直居中對齊 */
-    margin: 10px 0;
-  }
-  
-  /* 貼圖樣式 */
-  .sticker {
-    margin-right: 10px; /* 與消息內容之間的間隔 */
-  }
-  
-  .sticker img {
-    width: 40px; /* 調整貼圖大小 */
-    height: 40px;
-  }
-  
-  /* 消息內容樣式 */
-  .chat-message .user-message, .chat-message .assistant-message {
-    flex-grow: 1; /* 使消息內容占據剩餘空間 */
-    padding: 10px;
-    border-radius: 10px;
-  }
-  
-  .user-message {
-    background-color: #333; /* 用戶訊息的背景色 */
-  }
-  
-  .assistant-message {
-    background-color: #444; /* 助理訊息的背景色 */
-  }
-  
-  .input-area {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #1a1a1a; /* 終端機風格背景色 */
-    color: #33ff33; /* 文字顏色 */
-    padding: 10px;
-    border-radius: 5px;
-    margin: 20px auto;
-    width: 90%;
-    max-width: 800px;
-  }
-  
-  .input-area input {
-    flex-grow: 1;
-    border: 0px solid #262626;
-    background-color: #373636;
-    color: #33ff33;
-    padding: 10px;
-    margin-right: 10px;
-    border-radius:5px 5px 5px 5px;
-  }
-  
-  .send-button {
-    padding: 0 20px;
-    border: none;
-    background: #4caf50; /* 按鈕背景色 */
-    cursor: pointer;
-    outline: none;
-    height: 40px;
-    color: white; /* 按鈕文字顏色 */
-    border-radius: 5px;
-  }
-  
-  .send-button:hover {
-    background-color: #66ff66;
-  }
-  .switch-container {
-    margin-right: 10px;
-  }
-  .audio {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #1a1a1a; /* 終端機風格背景色 */
-    color: #33ff33; /* 文字顏色 */
-    padding: 10px;
-    border-radius: 5px;
-    margin: 20px auto;
-    width: 90%;
-    max-width: 800px;
-  }
-  
-  .audio-control {
-    flex-grow: 1;
-    margin-right: 10px;
-  }
-  
-  .audioUrl {
-    width: 100%; /* 控制音頻播放器的寬度 */
-    color: #33ff33; /* 音頻播放器文字顏色 */
-    border-radius: 5px;
-  }
-  
-  .audioBtn {
-    padding: 0 20px;
-    border: none;
-    background: #4caf50; /* 按鈕背景色 */
-    cursor: pointer;
-    outline: none;
-    height: 40px;
-    color: white; /* 按鈕文字顏色 */
-    border-radius: 5px;
-    
-  }
-  
-  .audioBtn:hover {
-    background-color: #66ff66; /* 按鈕懸停背景色 */
-  }
-  .live2dCanva{
-    z-index: 0;
-    position: relative;
-    height: 100%;
-    width: 100%;
-  }
-  .user-sticker{
-    width: 10%;
-    height: auto;
-    border-radius: 50px ;
-    margin: 2px 0px 2px 2px
-    
-  }
-  .assistant-sticker{
-    width: 10%;
-    height: auto;
-    border-radius: 50px ;
-    margin: 2px 0px 2px 2px
-    
-  }
+}
 
 
-  /* 整個滾動條的樣式 */
+/* 整個滾動條的樣式 */
 ::-webkit-scrollbar {
-  width: 4px; /* 橫向滾動條的高度 或 垂直滾動條的寬度 */
-  height: 100%; /* 橫向滾動條的高度 */
+width: 4px; /* 橫向滾動條的高度 或 垂直滾動條的寬度 */
+height: 100%; /* 橫向滾動條的高度 */
 }
 
 
 /* 滾動條軌道的樣式 */
 ::-webkit-scrollbar-track {
-  background: #555; /* 滾動條軌道的背景色 */
-  border-radius: 10px; /* 滾動條軌道的圓角 */
+background: #555; /* 滾動條軌道的背景色 */
+border-radius: 10px; /* 滾動條軌道的圓角 */
 }
 
 /* 滾動條的滑塊樣式 */
 ::-webkit-scrollbar-thumb {
-  background: #4caf50; /* 滾動條滑塊的背景色 */
-  border-radius: 10px; /* 滾動條滑塊的圓角 */
+background: #4caf50; /* 滾動條滑塊的背景色 */
+border-radius: 10px; /* 滾動條滑塊的圓角 */
 }
 
 /* 當鼠標經過滾動條滑塊時的樣式 */
 ::-webkit-scrollbar-thumb:hover {
-  background: #59d15d; /* 滾動條滑塊的懸停背景色 */
-  width: 2px;
+background: #59d15d; /* 滾動條滑塊的懸停背景色 */
+width: 2px;
 }
 
-  
 
-  
+

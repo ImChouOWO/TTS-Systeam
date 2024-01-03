@@ -37,7 +37,7 @@ function MainPage() {
       setMessages(prevMessages => [...prevMessages, { content: trimmedInput, type: 'user' }]);
       console.log(messages);
       setInput("");
-      socket.emit('user_text_input', { messages: trimmedInput, userID });
+      socket.emit('user_text_input', { messages: trimmedInput, userID ,'history':messages});
     }
   };
 
