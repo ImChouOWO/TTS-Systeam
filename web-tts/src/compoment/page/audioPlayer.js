@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-function AudioPlayer() {
+function AudioPlayer(props) {
+    const { data } = props;
     const audioRef = useRef(null);
-    const [audioSource, setSource] = useState('/voice/main_video.wav');
 
     useEffect(() => {
-        if (audioRef.current && audioSource) {
+        if (audioRef.current && data) {
+            audioRef.current.src = `/voice/${data}`; // 直接更新源
             audioRef.current.play()
                 .then(() => {
                     console.log("Audio is now playing");
@@ -14,13 +15,13 @@ function AudioPlayer() {
                     console.error("Audio playback failed:", error);
                 });
         }
-    }, [audioSource]);
+    }, [data]); // 依赖于 data
 
     return (
-        <audio ref={audioRef} preload="auto">
-            <source src={audioSource} type="audio/mpeg" />
-        </audio>
+        <audio ref={audioRef} preload="auto" />
     );
 }
+
+
 
 export default AudioPlayer;

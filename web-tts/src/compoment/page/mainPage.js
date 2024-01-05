@@ -3,6 +3,7 @@ import '../css/mainPage.css';
 import AudioRecorder from './AudioRecorder';
 import Live2DComponent from './live2d';
 import io from 'socket.io-client';
+import AudioPlayer from './audioPlayer';
 
 function MainPage() {
   const [messages, setMessages] = useState([]);
@@ -11,11 +12,20 @@ function MainPage() {
   const [userID, setUserID] = useState("test_1");
   const terminalImgRef = useRef(null);
   const chatHistoryRef = useRef(null);
+  const audioRef = useRef(null);
+  const [audioSource, setSource] = useState();
+  const [shouldPlay, setShouldPlay] = useState(false);
+
   useLayoutEffect(() => {
     if (chatHistoryRef.current) {
       chatHistoryRef.current.scrollTop = chatHistoryRef.current.scrollHeight;
+      
+      
     }
   }, [messages]); // 當messages更新時觸發滾動
+
+
+   
 
   
   
@@ -25,10 +35,25 @@ function MainPage() {
 
     newSocket.on("text_response", (data) => {
       setMessages(prevMessages => [...prevMessages, { content: data.message.content, type: data.message.type }]);
+      setShouldPlay(true);  // 接收到數據時設置 shouldPlay 為 true
+      
     });
     // 接收後即關閉通道
     return () => newSocket.disconnect();
   }, []);
+
+  useEffect(() => {
+    const newSocket = io('http://127.0.0.1:5000');
+    setSocket(newSocket);
+
+    newSocket.on("audio_path", (data) => {
+        console.log(data.message);
+        setSource(data.message); // 更新音频源
+    });
+
+    // 接收后即关闭通道
+    return () => newSocket.disconnect();
+}, []);
 
   const handleSend = () => {
     // input.trim()以解決react的異步特性
@@ -79,6 +104,10 @@ function MainPage() {
         <button className="send-button" onClick={handleSend}>Send</button>
       </div>
       <AudioRecorder data = {messages}/>
+      <AudioPlayer data={audioSource} shouldPlay={shouldPlay} />
+
+
+
     </div>
   );
 }
