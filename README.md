@@ -1,7 +1,37 @@
 ## 簡介/Introduction
 
-透過Local LLM、RAG、TTS、STT等技術所完成的專案  
+透過Local LLM、RAG、TTS、STT等技術所完成的專案 
 > This project was made by Local LLM、RAG、TTS and STT
+
+>[!NOTE]
+>此項專案利用Meta 提出的llama_cpp套件引用 Hugging face 中的 pre-trained model(Mistral 7B)
+>
+>[pre-trained model](https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.1-GGUF)
+>### Pytorch
+>建議安裝CUDA版本
+>
+> recommend running this project using the CUDA version of PyTorch.
+
+>[!important]
+>llama_cpp 使用教學
+>
+>llama_cpp tutorial
+>
+>[Run Llama 2 Locally with python](https://swharden.com/blog/2023-07-29-ai-chat-locally-with-python/)
+
+>*權重/weight*
+>
+>[mistral-7b-instruct-v0.1.Q3_K_M.gguf](https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.1-GGUF/blob/main/mistral-7b-instruct-v0.1.Q3_K_M.gguf)
+>
+>將下載的權重放置於
+>Place your weight under the LLM_weight
+>```bash
+>TTS-System
+>    └──backEnd
+>          └──LLM_weight
+>                └── .gguf file
+>```
+>
 
 **預覽/preview**
 >[!NOTE]
@@ -12,6 +42,17 @@
 >### RAG
 >使用者可以透過上傳TXT檔的方式使系統回答得更加準確
 >Users can get hight qulity response by upload txt file.
+>
+>### Embedding
+>
+>Sentence Transformers：[sentence_transformers](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
+>
+>這項專案使用 sentence_transformers 作為詞向量轉換的套件
+>
+>This project leverages the Sentence Transformers to embed the text.
+
+
+
 
 
 
