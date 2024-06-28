@@ -1,0 +1,16 @@
+7AM:Breakfast
+8AM:Checkemails
+9AM:Meeting
+11AM:Teambrainstormingsession
+12PM:Lunch
+1PM:Literaturereview
+2PM:Respondtoemails
+3PM:Proposalwriting
+4PM:Clientcall
+5PM:Reviewprojectmilestones
+6PM:Exercise
+7PM:Dinner
+8PM:Relaxation/Reading
+9PM:Preparefornextday
+10PM:Freetime
+11PM:Bedtime

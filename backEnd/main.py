@@ -20,9 +20,9 @@ import traceback
 # 定義全域變數
 RECODE_DIR = 'recode'
 WEB_TTS_PUBLIC_VOICE_DIR = '../web-tts/public/voice'
-EMBEDDING_FILE_DIR = 'C:/Users/as093/OneDrive/桌面/web/TTS-Systeam/backEnd/embedding_file'
-LLM_WEIGHT_DIR = 'C:/Users/as093/OneDrive/桌面/web/TTS-Systeam/backEnd/LLM_weight'
-USER_UPLOAD_TXT = 'C:/Users/as093/OneDrive/桌面/web/TTS-Systeam/backEnd/embedding_file/user_upload'
+EMBEDDING_FILE_DIR = 'embedding_file'
+LLM_WEIGHT_DIR = 'LLM_weight'
+USER_UPLOAD_TXT = 'embedding_file/user_upload'
 
 app = Flask(__name__,
             static_url_path='/python',
@@ -146,8 +146,11 @@ def rebuild_embedding_db(user_input: str):
         raise e
 
 def local_llm_generate_text(user_input: str, user_id: str) -> str:
+    
     content_path = os.path.join(USER_UPLOAD_TXT, f'user_upload_{user_id}.txt')
     pkl_path = os.path.join(EMBEDDING_FILE_DIR, 'embedding.pkl')
+    if os.path.exists(pkl_path) == False:
+        rebuild_embedding_db(user_input=user_input)
     relevant_contents = cos_similarity(content_path=content_path, pkl_path=pkl_path, user_input=user_input, top_k=5)
     result = ','.join(relevant_contents)
 
@@ -205,7 +208,9 @@ def user_rag_file():
 
     if file and allowed_file(file.filename):
         filename = f"user_upload_{user_id}"
+        
         file_path = os.path.join(EMBEDDING_FILE_DIR, 'user_upload', f"{filename}.txt")
+        print(f"folder path{file_path}")
         file.save(file_path)
         return jsonify({"message": "File uploaded successfully", "file_path": file_path}), 200
 
