@@ -3,7 +3,20 @@
 透過Local LLM、RAG、TTS、STT等技術所完成的專案  
 > This project was made by Local LLM、RAG、TTS and STT
 
-**預覽**
+**預覽/preview**
+>[!NOTE]
+> ### 基礎使用
+> 使用者可以透過文字輸入或語音輸入與系統互動，系統會以語音加文字的方式進行回饋
+>
+>Users can interact with the system by speaking or typing, and will receive feedback through voice and text.
+>### RAG
+>使用者可以透過上傳TXT檔的方式使系統回答得更加準確
+>Users can get hight qulity response by upload txt file.
+
+
+
+
+![preview](https://github.com/ImChouOWO/TTS-Systeam/blob/main/img/img%201.png)
 
 
 
