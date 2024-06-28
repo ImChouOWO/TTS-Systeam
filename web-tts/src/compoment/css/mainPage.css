@@ -201,6 +201,37 @@ border-radius: 10px; /* 滾動條滑塊的圓角 */
 background: #59d15d; /* 滾動條滑塊的懸停背景色 */
 width: 2px;
 }
-
-
-
+.file-uploader{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1a1a1a; /* 終端機風格背景色 */
+  color: #33ff33; /* 文字顏色 */
+  padding: 10px;
+  border-radius: 5px;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 800px;
+}
+.file-uploader button{
+  padding: 10px 20px;
+  border: none;
+  background-color: #4caf50; /* 按钮背景色 */
+  color: white; /* 按钮文字颜色 */
+  border-radius: 5px;
+  cursor: pointer;
+}
+.file-uploader input{
+  padding: 10px 20px;
+  border: none;
+  background-color: #4caf50; /* 按钮背景色 */
+  color: white; /* 按钮文字颜色 */
+  border-radius: 5px;
+  cursor: pointer;
+}
+.input-label:hover {
+  background-color: #66ff66; /* 标签悬停背景色 */
+}
+.input-file {
+  display: none; /* 隐藏文件输入框 */
+}

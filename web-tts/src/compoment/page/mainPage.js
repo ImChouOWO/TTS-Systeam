@@ -4,6 +4,7 @@ import AudioRecorder from './AudioRecorder';
 import Live2DComponent from './live2d';
 import io from 'socket.io-client';
 import AudioPlayer from './audioPlayer';
+import RagFileUploader from './ragFileUploader';
 
 function MainPage() {
   const [messages, setMessages] = useState([]);
@@ -72,24 +73,26 @@ function MainPage() {
 
   return (
     <div className="App">
-      <div className="terminal-container" ref={terminalImgRef} >
-        <div className='terminal-img' >
-          <Live2DComponent parentRef={terminalImgRef}/>
-        </div>
-        <div className="chat-history" ref={chatHistoryRef}>
-          {messages.map((message, index) => (
-            <>
-            
-            <div key={index} className={`chat-message ${message.type === 'user' ? 'user-message' : 'assistant-message'}`}>
-              <div className='sticker'>
-                <img src={`${message.type === 'user' ? 'img/user.png' : 'img/bot.png'}`} className={`${message.type === 'user' ? 'user-sticker' : 'assistant-sticker'}`}></img>
+      
+        <div className="terminal-container" ref={terminalImgRef} >
+          <div className='terminal-img' >
+            <Live2DComponent parentRef={terminalImgRef}/>
+          </div>
+          <div className="chat-history" ref={chatHistoryRef}>
+            {messages.map((message, index) => (
+              <>
+              
+              <div key={index} className={`chat-message ${message.type === 'user' ? 'user-message' : 'assistant-message'}`}>
+                <div className='sticker'>
+                  <img src={`${message.type === 'user' ? 'img/user.png' : 'img/bot.png'}`} className={`${message.type === 'user' ? 'user-sticker' : 'assistant-sticker'}`}></img>
+                </div>
+                {message.content}
               </div>
-              {message.content}
-            </div>
-            </>
-          ))}
+              </>
+            ))}
+          </div>
+          
         </div>
-      </div>
       <div className="input-area">
         <input 
           type="text" 
@@ -105,7 +108,7 @@ function MainPage() {
       </div>
       <AudioRecorder data = {messages}/>
       <AudioPlayer data={audioSource} shouldPlay={shouldPlay} />
-
+      <RagFileUploader/>
 
 
     </div>
