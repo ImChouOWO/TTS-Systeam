@@ -81,7 +81,7 @@
 > [**VALL-E-X**](https://github.com/Plachtaa/VALL-E-X)
 
 
-##如何執行/How to run this project
+## 如何執行/How to run this project
 
 💡 **為了確保語音合成相關功能可以使用，請先Clone [VALL-E-X](https://github.com/Plachtaa/VALL-E-X) 中的專案自行測試**
 
