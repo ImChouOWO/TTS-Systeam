@@ -8,8 +8,10 @@
 >
 >This project utilizes the llama_cpp library proposed by Meta to reference the pre-trained model (Mistral 7B) from Hugging Face.
 >
->---
 >[pre-trained model](https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.1-GGUF)
+>
+>---
+>
 >### Pytorch
 >建議安裝CUDA版本
 >
